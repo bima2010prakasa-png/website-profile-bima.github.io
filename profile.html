@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> website profile bim</title>
+    <style>
+      *{margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: 'poppins',sans-serif;}
+      html { scroll-behavior: smooth; }
+
+      .music-player {
+        text-align: left;
+        position: fixed;
+        z-index: 1;
+      }
+      .kaset-box {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .kaset {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 40px solid black;
+        box-shadow: 0 0 30px rgb(0, 0, 0);
+        animation: muter 3s linear infinite;
+        animation-play-state: paused;
+        
+      }
+      .tombol-t {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+        color: white;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        padding: 5px 8px;
+        pointer-events: none;
+      }
+      audio[controls]:playing +.kaset,
+      audio:playing ~.kaset {
+        animation-play-state: running;
+      }
+      @keyframes muter {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+      .hero {
+        color: white;
+        height: 100vh;
+        background: url('Bima.jpg') center/cover fixed;
+        text-align: center;
+        padding: 50px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        position: relative;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: #0000009f;
+        z-index: 0;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 0;
+      }
+      .foto-profil {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 5px solid white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        margin-bottom: 50px;
+      }
+      .foto-profile {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 5px solid white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        margin-bottom: 50px;
+        margin-left: 180px;
+        
+        }
+      .hero h1 { font-size: 40px; }
+      .hero p { font-size: 18px; }
+      .hero h4 { font-size: 40px; }
+      
+      .skill span {
+        background: rgba(21, 21, 21, 0.3333333333333333);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin: 5px;
+        display: inline-block;
+      }
+      .sosmed {
+        margin-top: 20px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+      .btn-ig, .btn-tiktok {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+      }
+      .btn-ig {
+        background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+      }
+      .btn-tiktok {
+       background: #000;
+       border: 2px solid #28a5a5;
+      }
+      .btn-tiktok:hover, .btn-ig:hover {
+        transform: scale(1.05);
+      }
+      .about {
+          padding: 40px 20px;
+        background: linear-gradient(135deg, #fbff00, #00990a);
+        color: #1a1a1a;
+        padding: 40px 20px;
+        text-align: center;
+        min-height: 40vh;
+      }
+      .about i {
+        font-size: 35px;
+        margin-bottom: 20px;
+        color: #443a02;
+      }
+      .body {
+        background-color: #000000;
+      }
+      .about p {
+        max-width: 600px;
+        margin: auto;
+        line-height: 1.8;
+        color: #000000;
+      } 
+      .btn-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #fbff00, #FFA500);
+        color: #000;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        margin-top: 20px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2)
+      }
+      .btn-link:hover {
+        transform: scale(1.05);
+      }
+      .bayang {
+        font-size: 1000px;
+        color: #f6e90d;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      }
+      .scroll-down {
+        position: absolute;
+        justify-content: left;
+        bottom: 30px;
+        color: #55bffd;
+        font-size: 30px;
+        text-decoration: none;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translateY(0); }
+        40% {transform: translateY(-20px);}
+        60% {transform: translateY(-10px);}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="music-player">
+      
+      <div class="kaset-box" onclick="toggleLagu()">
+      <img src="hindi.jpg" class="kaset" alt="kaset">
+        <div class="tombol-t">▶︎</div>
+    </div>
+      <audio id="lagu" src="mata air.mp3" loop></audio>
+    </div>
+    <script>
+      const lagu = document.getElementById('lagu');
+      const kaset = document.querySelector('.kaset');
+      const tombol = document.querySelector('.tombol-t');
+
+      function toggleLagu() {
+        if (lagu.paused) {
+          lagu.play();
+          kaset.style.animationPlayState = 'running';
+          tombol.innerHTML = '❚❚';
+        } else {
+          lagu.pause();
+          kaset.style.animationPlayState = 'paused';
+          tombol.innerHTML = '▶︎';
+        }
+      }
+      lagu.onplay = () => kaset.style.animationPlayState = 'running';
+      lagu.onpause = () => kaset.style.animationPlayState = 'paused'
+    </script>
+    <section class="hero">
+      <div class="hero-content">
+        <img src="bom.jpg" alt="Foto bima" class="foto-profil">
+        <h1> Hallo Nama ku Bima </h1>
+        <p> selamat datang!!</p>
+      </div>
+      <a href="#about" class="scroll-down">↓CLICK↓</a>
+    </section>
+
+    <section class="about" id="about">
+      <i>background ku</i>
+      <h4> Hai nama asliku Bima Prakasa saya tinggal dan besar di dusun penanggoan duren, lahir di palembang yaitu 28 November 2010.
+    
+       saya suka belajar hal² baru, karna saya orang nya mudah bosan terhadap hal² yg berulang²
+      <br><br>
+        <img src="kecil.jpg" alt="gay" class="foto-profil">
+        warna kesukaan ku hijau tua, karna lihat lbih calm/lbih tenang, dan lbih dewasa anjayy, tpi ttp backgroundny ku setting² sedikit biar kayak warna manggo
+      <br><br>
+        <img src="ha.jpg" alt="" class="foto-profile">
+        gilaa... tw gaa bikin website se-sederhana ini bikin otak ngeblank njirr pgn brhenti... tpi untg gwehh jagoo :p 
+        <br><br>
+        <img src="pler.jpg" class="foto-profil">
+        saya hidup dri org tua yg sama² pernah  cerai, dri sisi ibu saya adl anak bungsu dri 2 bersaudarah. sedangkan dri bapak saya jga anak bungsu dri 3 bersaudarah. semua kakak² ku laki² pas masih kecil saya sudh terbiasa melihat ke2 ortu bertengkar, stiap mereka bertemu pasti ad pertengkaran,dan saya tidak tau hrus bercerita ke syp?? mungkin itu yg menjadikan saya sebagai anak yg problematik dan sering dimusuhi... pdahal saya cma ingin berteman, 
+      <br><br>
+        <img src="cie.jpg" class="foto-profile">
+        HOBI KU:</h4>
+        <p>
+        bermain game, olahraga (main futsal,joging,workout), menggambar, tidur
+        </p>
+        <br><br>
+        <h4>
+      SKILL:
+        </h4>
+          <p>
+      main bola/futsal,
+        ngoding(sedikit), dan menggambar
+          </p>
+      
+      <section class="about">
+        <h2>Temuin aku disini!</h2>
+        <div class="sosmed">
+          <a href="https://www.instagram.com/troll_deckk?igsi=MWJreXMzdnJkenlueg==" target="_blank" class="btn-ig"> INSTAGRAM</a>
+          <a href="https://tiktok.com/@bima___kun" target="_blank" class="btn-tiktok">TIKTOK</a>
+        </div>
+      
+      <a href="https://bjir0bima-ux.github.io/ege/index2.html" class="btn-link">Lihat first website saya</a>
+          
+        <div class="skill">
+          <span>HTML</span>
+          <span>C++</span>
+          <span>Jc Script</span>
+        </div>
+    </section>
+    </section>
+  </body>
+</html>
